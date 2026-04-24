@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SLV Plastics Design System — premium agri-industrial */
+@layer base {
+  :root {
+    --background: 60 20% 98%;
+    --foreground: 60 5% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 60 5% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 60 5% 10%;
+
+    /* Brand greens */
+    --primary: 159 70% 37%;            /* #1D9E75 */
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 165 76% 25%;       /* #0F6E56 */
+    --primary-deep: 156 82% 13%;       /* #063d2a */
+    --primary-light: 156 60% 92%;      /* #E1F5EE */
+    --primary-glow: 152 75% 70%;       /* #7debb8 */
+
+    /* Accent amber */
+    --accent: 31 78% 41%;              /* #BA7517 */
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 39 80% 92%;        /* #FAEEDA */
+
+    --secondary: 60 15% 95%;
+    --secondary-foreground: 60 5% 15%;
+
+    --muted: 60 12% 94%;
+    --muted-foreground: 60 4% 40%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 60 10% 88%;
+    --input: 60 10% 88%;
+    --ring: 159 70% 37%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(140deg, hsl(156 82% 9%) 0%, hsl(156 82% 13%) 40%, hsl(165 76% 25%) 75%, hsl(159 70% 37%) 100%);
+    --gradient-deep: linear-gradient(135deg, hsl(156 82% 9%), hsl(156 82% 13%), hsl(165 76% 25%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(60 20% 98%));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(60 5% 10% / 0.08);
+    --shadow-medium: 0 12px 40px hsl(60 5% 10% / 0.12);
+    --shadow-glow: 0 24px 64px hsl(156 82% 13% / 0.4);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .bg-hero-gradient { background: var(--gradient-hero); }
+  .bg-deep-gradient { background: var(--gradient-deep); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-medium { box-shadow: var(--shadow-medium); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .text-primary-glow { color: hsl(var(--primary-glow)); }
+  .bg-primary-deep { background-color: hsl(var(--primary-deep)); }
+  .bg-primary-light { background-color: hsl(var(--primary-light)); }
+  .border-primary-glow { border-color: hsl(var(--primary-glow)); }
+}
