@@ -27,7 +27,7 @@ const Home = () => {
         <StatsBar />
       </Reveal>
 
-      {/* ── Statement Quote Section (raviklaassens style) ── */}
+      {/* ── Statement Quote Section ── */}
       <section ref={quoteRef} className="relative overflow-hidden py-32 md:py-44 bg-primary/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsla(159,70%,37%,0.08)_0%,transparent_60%)]" />
         
@@ -45,7 +45,7 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* ── Process / Features Grid (raviklaassens style) ── */}
+      {/* ── Process / Features Grid ── */}
       <section className="bg-background px-6 py-24">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-12 gap-5">
