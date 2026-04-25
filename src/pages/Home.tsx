@@ -73,6 +73,7 @@ const Home = () => {
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Video 1: Factory Tour */}
             <Reveal delay={0.2}>
               <div className="relative rounded-3xl overflow-hidden border border-green-500/20 group shadow-[0_0_50px_-15px_rgba(74,222,128,0.3)]">
@@ -82,20 +83,29 @@ const Home = () => {
                   className="w-full h-[450px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050c07] to-transparent opacity-60" />
-                <div className="absolute bottom-8 left-8 text-left">
-                  <p className="text-white text-2xl font-bold">Bangalore Facility</p>
+                <div className="absolute bottom-8 left-8">
+                  <p className="text-white text-2xl font-bold uppercase tracking-tight">Bangalore Facility</p>
                   <p className="text-green-500/70 font-mono text-xs uppercase tracking-widest">24/7 Operations</p>
                 </div>
               </div>
             </Reveal>
 
-            {/* Video 2: Precision Robotic Arm */}
+            {/* Video 2: Robotic Precision */}
             <Reveal delay={0.4}>
               <div className="relative rounded-3xl overflow-hidden border border-green-500/20 group shadow-[0_0_50px_-15px_rgba(74,222,128,0.3)]">
                 <video 
                   src="https://assets.mixkit.co/videos/preview/mixkit-automated-robotic-arm-in-a-factory-31744-large.mp4" 
                   autoPlay loop muted playsInline 
                   className="w-full h-[450px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050c07] to-transparent opacity-60" />
+                <div className="absolute bottom-8 left-8">
+                  <p className="text-white text-2xl font-bold uppercase tracking-tight">Robotic Precision</p>
+                  <p className="text-green-500/70 font-mono text-xs uppercase tracking-widest">Micron Accuracy</p>
+                </div>
+              </div>
+            </Reveal>
+          </div>
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050c07] to-transparent opacity-60" />
                 <div className="absolute bottom-8 left-8 text-left">
