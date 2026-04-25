@@ -61,7 +61,50 @@ const Home = () => {
       <Reveal>
         <StatsBar />
       </Reveal>
+{/* --- NEW AI VIDEO SHOWCASE SECTION --- */}
+      <section className="py-24 bg-[#050c07] border-y border-green-900/20">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="text-center mb-16">
+              <h2 className="text-green-400 font-mono tracking-[0.3em] text-sm mb-4 uppercase">Live Manufacturing Feed</h2>
+              <p className="text-3xl md:text-5xl font-bold tracking-tighter">Precision in Motion</p>
+            </div>
+          </Reveal>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {/* Video 1 */}
+            <Reveal delay={0.2}>
+              <div className="relative rounded-3xl overflow-hidden border border-green-500/20 group shadow-[0_0_50px_-15px_rgba(74,222,128,0.3)]">
+                <ReactPlayer 
+                  url="https://assets.mixkit.co/videos/preview/mixkit-interior-of-a-modern-factory-39644-large.mp4"
+                  playing loop muted width="100%" height="450px" style={{ objectFit: 'cover' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050c07] to-transparent opacity-60" />
+                <div className="absolute bottom-8 left-8">
+                  <p className="text-white text-2xl font-bold">Bangalore Facility</p>
+                  <p className="text-green-500/70 font-mono text-xs uppercase tracking-widest">24/7 Operations</p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Video 2 */}
+            <Reveal delay={0.4}>
+              <div className="relative rounded-3xl overflow-hidden border border-green-500/20 group shadow-[0_0_50px_-15px_rgba(74,222,128,0.3)]">
+                <ReactPlayer 
+                  url="https://assets.mixkit.co/videos/preview/mixkit-automated-robotic-arm-in-a-factory-31744-large.mp4"
+                  playing loop muted width="100%" height="450px" style={{ objectFit: 'cover' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050c07] to-transparent opacity-60" />
+                <div className="absolute bottom-8 left-8">
+                  <p className="text-white text-2xl font-bold">Robotic Precision</p>
+                  <p className="text-green-500/70 font-mono text-xs uppercase tracking-widest">Micron Accuracy</p>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+      
       {/* ── Statement Quote Section (raviklaassens style) ── */}
       <section
         ref={quoteRef}
