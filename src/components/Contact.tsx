@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, User, Building2, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 const contactRows = [
   { icon: User, label: "Contact Person", val: "G. S. Kumar" },
@@ -20,6 +19,8 @@ const enquirySchema = z.object({
   message: z.string().trim().max(4000, "Message too long").optional().or(z.literal("")),
 });
 
+const FORMSPREE_ID = "https://formspree.io/f/mkjnqlnl"; // ← paste your Formspree ID here
+
 const Contact = () => {
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
@@ -34,31 +35,41 @@ const Contact = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const parsed = enquirySchema.safeParse(form);
     if (!parsed.success) {
-      const first = parsed.error.errors[0]?.message ?? "Please check the form";
-      toast.error(first);
+      toast.error(parsed.error.errors[0]?.message ?? "Please check the form");
       return;
     }
 
-    // Construct email content
-    const subject = encodeURIComponent(`New Website Enquiry: ${form.product}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\n` +
-      `Email: ${form.email}\n` +
-      `Phone: ${form.phone}\n` +
-      `Product Interest: ${form.product}\n\n` +
-      `Message:\n${form.message}`
-    );
+    setSubmitting(true);
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          product: form.product,
+          message: form.message,
+          _subject: `New Enquiry: ${form.product} — SLV Plastics`,
+        }),
+      });
 
-    // Open user's email client
-    window.location.href = `mailto:slvplastics@yahoo.in?subject=${subject}&body=${body}`;
-    
-    toast.success("Opening your email client...");
-    setForm({ name: "", email: "", phone: "", product: "Slatted Mats", message: "" });
+      if (res.ok) {
+        toast.success("✅ Enquiry sent! G.S. Kumar will contact you soon.");
+        setForm({ name: "", email: "", phone: "", product: "Slatted Mats", message: "" });
+      } else {
+        toast.error("Something went wrong. Please call +91 98450 24330.");
+      }
+    } catch {
+      toast.error("Network error. Please try again or call us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -100,10 +111,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white/[0.06] border border-white/10 rounded-2xl p-8"
-          >
+          <form onSubmit={handleSubmit} className="bg-white/[0.06] border border-white/10 rounded-2xl p-8">
             <div className="grid sm:grid-cols-2 gap-4 mb-4">
               <Field label="Name" name="name" placeholder="Your name" value={form.name} onChange={update("name")} required />
               <Field label="Phone" name="phone" placeholder="+91" value={form.phone} onChange={update("phone")} />
@@ -139,12 +147,10 @@ const Contact = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-destructive text-destructive-foreground font-bold text-[15px] py-4 rounded-lg hover:bg-destructive/90 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-8px_hsl(var(--destructive)/0.6)] tracking-[0.5px] uppercase disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2"
+              className="w-full bg-destructive text-destructive-foreground font-bold text-[15px] py-4 rounded-lg hover:bg-destructive/90 transition-all hover:-translate-y-0.5 tracking-[0.5px] uppercase disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {submitting ? (
-                <>
-                  <Loader2 size={16} className="animate-spin" /> Sending…
-                </>
+                <><Loader2 size={16} className="animate-spin" /> Sending…</>
               ) : (
                 "Send Inquiry"
               )}
